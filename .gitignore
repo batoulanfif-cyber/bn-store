@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# env files (never commit real secrets)
+.env*.local
+.env.production
+
+# uploads (local dev only, production uses Cloudinary)
+public/uploads/
+
+# logs / OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# database backups
+database/*.json

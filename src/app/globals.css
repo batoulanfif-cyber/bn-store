@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background: #F7F1E8;
+    color: #1B1512;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  * {
+    @apply border-gray-200;
+  }
+
+  ::selection {
+    @apply bg-primary-600 text-cream;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-pill 
+           bg-primary-600 text-cream font-medium text-body-sm 
+           transition-all duration-300 ease-spring
+           hover:bg-primary-700 hover:shadow-pink-glow-hover
+           active:scale-[0.98]
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-burgundy-200;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-pill 
+           bg-transparent border-2 border-primary-600 text-primary-600 font-medium text-body-sm
+           transition-all duration-300 ease-spring
+           hover:bg-primary-50 hover:shadow-pink-glow
+           active:scale-[0.98]
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2;
+  }
+  
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill 
+           bg-transparent text-gray-700 font-medium text-body-sm
+           transition-all duration-300
+           hover:bg-gray-100 hover:text-gray-900
+           active:scale-[0.98];
+  }
+  
+  .card-base {
+    @apply bg-white rounded-card overflow-hidden shadow-card 
+           transition-all duration-400 ease-spring
+           hover:shadow-card-hover hover:-translate-y-1;
+  }
+  
+  .input-base {
+    @apply w-full px-5 py-3.5 rounded-pill bg-gray-50 
+           border border-gray-200 text-gray-900 placeholder-gray-400
+           text-body-sm
+           transition-all duration-300
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+           hover:border-gray-300;
+  }
+  
+  .icon-btn {
+    @apply p-2.5 rounded-full text-gray-600 
+           transition-all duration-300
+           hover:bg-gray-100 hover:text-gray-900
+           active:scale-95
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500;
+  }
+  
+  .icon-btn-primary {
+    @apply p-2.5 rounded-full bg-primary-100 text-primary-600
+           transition-all duration-300
+           hover:bg-primary-200 hover:text-primary-700
+           active:scale-95;
+  }
+  
+  .badge {
+    @apply inline-flex items-center justify-center px-2.5 py-1 rounded-pill
+           text-caption font-semibold text-white bg-primary-600;
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-header {
+    @apply flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10;
+  }
+  
+  .section-title {
+    @apply font-serif font-semibold text-heading-lg text-gray-900;
+  }
+  
+  .section-subtitle {
+    @apply text-body text-gray-600 max-w-md;
+  }
+  
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-body-sm font-medium text-primary-600
+           transition-all duration-300
+           hover:gap-2.5 hover:text-primary-700;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-marquee {
+    animation: marquee 26s linear infinite;
+  }
+
+  @keyframes marquee {
+    to { transform: translateX(-50%); }
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+  
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  @keyframes slideInRight {
+    from { 
+      opacity: 0; 
+      transform: translateX(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  .hero-gradient {
+    background: #F7F1E8;
+  }
+
+  /* ---- Luxe BN STORE utilities (from bn-store-luxe design) ---- */
+  .eyebrow-luxe {
+    @apply flex items-center gap-3 text-[11px] tracking-[0.24em] uppercase font-medium text-gold;
+  }
+  .eyebrow-luxe::before {
+    content: '';
+    @apply inline-block w-8 h-px bg-gold;
+  }
+  .btn-luxe-solid {
+    @apply inline-flex items-center justify-center gap-2 bg-primary-600 text-cream
+           px-8 py-4 text-xs tracking-[0.2em] uppercase font-medium
+           border border-primary-600 transition-all duration-300
+           hover:bg-primary-700 hover:-translate-y-0.5;
+  }
+  .btn-luxe-link {
+    @apply inline-flex items-center gap-2.5 text-xs tracking-[0.2em] uppercase font-medium
+           text-ink border-b border-ink pb-1.5 transition-all duration-300;
+  }
+  .arch-frame {
+    @apply bg-white border border-[#E2D6C3] shadow-card;
+    border-radius: 999px 999px 14px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+[dir="rtl"] {
+  .card-base {
+    text-align: right;
+  }
+  
+  .absolute.left-3 {
+    left: auto;
+    right: 0.75rem;
+  }
+  
+  .absolute.right-3 {
+    right: auto;
+    left: 0.75rem;
+  }
+}
+
+[dir="rtl"] .icon-btn:focus-visible,
+[dir="rtl"] .icon-btn-primary:focus-visible {
+  outline-offset: 2px;
+}
+
+[dir="rtl"] .group-hover\:opacity-100 {
+  opacity: 0;
+}
+
+[dir="rtl"] .group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+/* ---- BN STORE phone (iOS + Android) ---- */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  padding-top: env(safe-area-inset-top);
+  overscroll-behavior-y: none;
+}
+input, select, textarea, button {
+  font-size: 16px; /* stops iOS auto-zoom */
+}
+@media (max-width: 1023px) {
+  main { padding-bottom: 8px; }
+  img { -webkit-touch-callout: none; }
+}
