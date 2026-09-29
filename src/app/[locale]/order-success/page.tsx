@@ -1,21 +1,23 @@
 'use client';
 
-import { Suspense, use } from 'react';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle } from 'lucide-react';
 import { Locale, getDir } from '@/lib/i18n';
 import { Button } from '@/components/ui/Button';
 
-export default function OrderSuccessPage({ params }: { params: Promise<{ locale: Locale }> }) {
+// NOTE: Next.js 14 passes `params` as a plain object (not a Promise).
+// Do NOT use React's `use()` here — it throws on Next 14 and the customer
+// sees an error page right after their confirmed order.
+export default function OrderSuccessPage({ params }: { params: { locale: Locale } }) {
   return (
     <Suspense fallback={<div className="min-h-screen grid place-items-center text-sm text-[#6E6259]">…</div>}>
-      <SuccessInner params={params} />
+      <SuccessInner locale={params.locale} />
     </Suspense>
   );
 }
 
-function SuccessInner({ params }: { params: Promise<{ locale: Locale }> }) {
-  const { locale } = use(params);
+function SuccessInner({ locale }: { locale: Locale }) {
   const searchParams = useSearchParams();
   const orderNumber = searchParams.get('order');
   const dir = getDir(locale);
@@ -42,7 +44,7 @@ function SuccessInner({ params }: { params: Promise<{ locale: Locale }> }) {
           <Button onClick={() => (window.location.href = '/')} variant="primary">
             {ar ? 'مواصلة التسوق' : 'Continuer mes achats'}
           </Button>
-          <Button onClick={() => (window.location.href = '/#produits')} variant="secondary">
+          <Button onClick={() => (window.location.href = '/products')} variant="secondary">
             {ar ? 'عرض المنتجات' : 'Voir les produits'}
           </Button>
         </div>
