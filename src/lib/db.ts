@@ -18,7 +18,13 @@ const pool = mysql.createPool({
 });
 
 export async function query<T>(sql: string, params: any[] = []): Promise<T[]> {
-  const [rows] = await pool.execute(sql, params);
+  // NOTE: pool.query (text protocol) instead of pool.execute (binary
+  // prepared-statement protocol). TiDB Cloud Serverless can drop the
+  // server-side prepared handle between PREPARE and EXECUTE across its
+  // gateway (high latency + connection migration), which makes every
+  // execute() fail while plain queries work. Values are still escaped
+  // client-side by mysql2, so placeholders remain injection-safe.
+  const [rows] = await pool.query(sql, params);
   return rows as T[];
 }
 
@@ -28,7 +34,8 @@ export async function queryOne<T>(sql: string, params: any[] = []): Promise<T | 
 }
 
 export async function execute(sql: string, params: any[] = []): Promise<mysql.ResultSetHeader> {
-  const [result] = await pool.execute(sql, params);
+  // Same reason as query(): text protocol, no server-side prepared handles.
+  const [result] = await pool.query(sql, params);
   return result as mysql.ResultSetHeader;
 }
 
