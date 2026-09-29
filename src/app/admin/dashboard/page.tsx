@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Package, ShoppingCart, Clock, CheckCircle, XCircle, TrendingUp, DollarSign } from 'lucide-react';
+import { Package, ShoppingCart, Clock, CheckCircle, XCircle, TrendingUp, DollarSign, Lock } from 'lucide-react';
 import { Locale, getTranslation, getDir } from '@/lib/i18n';
 import { formatPrice } from '@/lib/utils';
 import { cn } from '@/lib/utils';
@@ -129,6 +129,80 @@ export default function AdminDashboardPage({ params }: { params: Promise<{ local
           </div>
         </div>
       </div>
+
+      <div className="bg-white rounded-card-lg p-6 shadow-card">
+        <h2 className="font-semibold text-body-lg text-gray-900 mb-1 flex items-center gap-2">
+          <Lock className="w-5 h-5 text-gray-400" aria-hidden="true" />
+          Change Password
+        </h2>
+        <p className="text-caption text-gray-500 mb-4">Update the password for your admin account</p>
+        <PasswordForm />
+      </div>
     </div>
+  );
+}
+
+function PasswordForm() {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState<{ type: 'ok' | 'err'; text: string } | null>(null);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage(null);
+    if (newPassword !== confirmPassword) {
+      setMessage({ type: 'err', text: 'New passwords do not match' });
+      return;
+    }
+    setSaving(true);
+    try {
+      const res = await fetch('/api/admin/password', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.success) throw new Error(data.error || 'Failed to update password');
+      setMessage({ type: 'ok', text: 'Password updated successfully' });
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (err) {
+      setMessage({ type: 'err', text: err instanceof Error ? err.message : 'Failed to update password' });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const input = 'w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-primary-500';
+
+  return (
+    <form onSubmit={submit} className="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end">
+      <label className="block">
+        <span className="text-caption text-gray-500 font-medium">Current password</span>
+        <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} required className={input} autoComplete="current-password" />
+      </label>
+      <label className="block">
+        <span className="text-caption text-gray-500 font-medium">New password (min 8)</span>
+        <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} className={input} autoComplete="new-password" />
+      </label>
+      <label className="block">
+        <span className="text-caption text-gray-500 font-medium">Confirm new password</span>
+        <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required minLength={8} className={input} autoComplete="new-password" />
+      </label>
+      <div>
+        <button type="submit" disabled={saving} className="btn-primary w-full disabled:opacity-50">
+          {saving ? 'Saving…' : 'Update'}
+        </button>
+      </div>
+      {message && (
+        <p className={message.type === 'ok' ? 'text-green-700 text-sm sm:col-span-4' : 'text-red-700 text-sm sm:col-span-4'} role="status">
+          {message.text}
+        </p>
+      )}
+    </form>
   );
 }
