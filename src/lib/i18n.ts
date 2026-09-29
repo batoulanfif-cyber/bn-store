@@ -85,7 +85,6 @@ type Translations = {
       footTagline: string;
       footRights: string;
       footPay: string;
-      adminSpace: string;
     };
     cart: {
       title: string;
@@ -218,7 +217,6 @@ export const translations: Translations = {
       footTagline: 'Rouges rechargeables, paiement cash à la livraison.',
       footRights: 'Tous droits réservés',
       footPay: 'Visa · CIB · EDAHABIA · Cash à la livraison',
-      adminSpace: 'Espace vendeuse',
     },
     cart: {
       title: 'Votre panier',
@@ -348,7 +346,6 @@ export const translations: Translations = {
       footTagline: 'أحمر شفاه قابل لإعادة التعبئة، والدفع نقداً عند الاستلام.',
       footRights: 'كل الحقوق محفوظة',
       footPay: 'CIB · EDAHABIA · الدفع نقداً عند الاستلام',
-      adminSpace: 'دخول البائعة',
     },
     cart: {
       title: 'سلة التسوق',
