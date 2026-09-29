@@ -33,7 +33,7 @@ export function ProductGrid({ locale }: { locale: Locale }) {
               {t.products.title} <em className="italic font-normal text-primary-600">{t.products.subtitle}</em>
             </h2>
           </div>
-          <a href="/checkout" className="btn-luxe-link self-start sm:self-auto" dir={isRTL ? 'rtl' : 'ltr'}>
+          <a href="/products" className="btn-luxe-link self-start sm:self-auto" dir={isRTL ? 'rtl' : 'ltr'}>
             {t.products.viewAll}
             <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} aria-hidden="true" />
           </a>

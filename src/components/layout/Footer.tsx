@@ -37,6 +37,7 @@ export function FooterBar({ locale, className }: { locale: Locale; className?: s
             <h4 className="text-[11px] tracking-[0.24em] uppercase text-cream/45 mb-4">{t.luxe.footShop}</h4>
             <ul className="space-y-2.5 text-sm text-cream/70">
               <li><a href="/#produits" className="hover:text-cream">{t.nav.products}</a></li>
+              <li><a href="/products" className="hover:text-cream">{t.products.viewAll}</a></li>
               <li><a href="/checkout" className="hover:text-cream">{t.luxe.orderNow}</a></li>
             </ul>
           </div>
@@ -51,7 +52,6 @@ export function FooterBar({ locale, className }: { locale: Locale; className?: s
             <h4 className="text-[11px] tracking-[0.24em] uppercase text-cream/45 mb-4">{t.luxe.footHelp}</h4>
             <ul className="space-y-2.5 text-sm text-cream/70">
               <li><a href="/checkout" className="hover:text-cream">{t.nav.contact}</a></li>
-              <li><a href="/admin/login" className="hover:text-cream">{t.luxe.adminSpace}</a></li>
             </ul>
           </div>
         </div>

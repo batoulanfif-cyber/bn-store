@@ -36,6 +36,8 @@ type Translations = {
       addToCart: string;
       wishlist: string;
       priceSuffix: string;
+      all: string;
+      noResults: string;
     };
     footer: {
       delivery: string;
@@ -167,6 +169,8 @@ export const translations: Translations = {
       addToCart: 'Ajouter au panier',
       wishlist: 'Ajouter aux favoris',
       priceSuffix: 'DA',
+      all: 'Tous',
+      noResults: 'Aucun produit trouvé',
     },
     footer: {
       delivery: 'Livraison rapide',
@@ -295,6 +299,8 @@ export const translations: Translations = {
       addToCart: 'أضف للسلة',
       wishlist: 'أضف للمفضلة',
       priceSuffix: 'د.ج',
+      all: 'الكل',
+      noResults: 'لا توجد منتجات مطابقة',
     },
     footer: {
       delivery: 'توصيل سريع',
