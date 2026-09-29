@@ -1,8 +1,33 @@
 'use client';
 
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { Truck, Shield, Headphones, CreditCard } from 'lucide-react';
+import { Truck, Shield, Headphones, CreditCard, Facebook, Instagram, Smartphone } from 'lucide-react';
 import { Locale, getTranslation, getDir } from '@/lib/i18n';
+
+function InstallAppButton({ label, hint }: { label: string; hint: string }) {
+  const [showHint, setShowHint] = useState(false);
+
+  const install = async () => {
+    const dp = (window as unknown as { __bnInstallPrompt?: { prompt: () => void; userChoice: Promise<unknown> } }).__bnInstallPrompt;
+    if (dp) {
+      dp.prompt();
+      await dp.userChoice;
+    } else {
+      setShowHint((v) => !v);
+    }
+  };
+
+  return (
+    <li>
+      <button onClick={install} className="hover:text-cream inline-flex items-center gap-1.5">
+        <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
+        {label}
+      </button>
+      {showHint && <p className="mt-1.5 text-[12px] text-cream/50">{hint}</p>}
+    </li>
+  );
+}
 
 export function FooterBar({ locale, className }: { locale: Locale; className?: string }) {
   const t = getTranslation(locale);
@@ -51,7 +76,19 @@ export function FooterBar({ locale, className }: { locale: Locale; className?: s
           <div>
             <h4 className="text-[11px] tracking-[0.24em] uppercase text-cream/45 mb-4">{t.luxe.footHelp}</h4>
             <ul className="space-y-2.5 text-sm text-cream/70">
-              <li><a href="/checkout" className="hover:text-cream">{t.nav.contact}</a></li>
+              <li>
+                <a href="https://www.facebook.com/profile.php?id=61594861916745" target="_blank" rel="noopener noreferrer" className="hover:text-cream inline-flex items-center gap-1.5">
+                  <Facebook className="w-3.5 h-3.5" aria-hidden="true" />
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/bn_store_cosmitics" target="_blank" rel="noopener noreferrer" className="hover:text-cream inline-flex items-center gap-1.5">
+                  <Instagram className="w-3.5 h-3.5" aria-hidden="true" />
+                  Instagram
+                </a>
+              </li>
+              <InstallAppButton label={t.mobile.installApp} hint={t.mobile.installAndroid} />
             </ul>
           </div>
         </div>

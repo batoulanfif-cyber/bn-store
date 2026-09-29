@@ -141,6 +141,7 @@ type Translations = {
       installAndroid: string;
       installIos: string;
       installBtn: string;
+      installApp: string;
     };
   };
 };
@@ -273,6 +274,7 @@ export const translations: Translations = {
       installAndroid: '1 touche pour commander plus vite, comme une vraie app.',
       installIos: 'Touchez Partager puis « Sur l’écran d’accueil »',
       installBtn: 'Installer',
+      installApp: 'Installer l’application',
     },
   },
   ar: {
@@ -402,6 +404,7 @@ export const translations: Translations = {
       installAndroid: 'زر واحد للطلب أسرع، مثل تطبيق حقيقي.',
       installIos: 'اضغط مشاركة ثم «على الشاشة الرئيسية»',
       installBtn: 'تثبيت',
+      installApp: 'ثبّت التطبيق',
     },
   },
 };

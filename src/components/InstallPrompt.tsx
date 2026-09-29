@@ -23,6 +23,9 @@ export function InstallPrompt() {
 
     const onPrompt = (e: Event) => {
       e.preventDefault();
+      // Expose to footer install button (all devices).
+      (window as unknown as { __bnInstallPrompt?: Event }).__bnInstallPrompt = e;
+      window.dispatchEvent(new Event('bn:install-ready'));
       setDeferred(e);
       setShow(true);
     };
